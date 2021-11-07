@@ -14,9 +14,13 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "bigdealershipjir";
   }
-}
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(null);
   }
+
+}
+
+

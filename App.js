@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-
+import { NavigationContainer } from '@react-navigation/native';
 
 import React from 'react';
 import type {Node} from 'react';
@@ -16,12 +16,17 @@ import {
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
+
+
+import Home from './views/home'
+
+
 const Drawer = createDrawerNavigator();
 
-function App() {
+function MyDrawer() {
   return (
       <Drawer.Navigator>
-        <Drawer.Screen name="Feed" component={Feed} />
+        <Drawer.Screen name="Feed" component={Home} />
         {/*<Drawer.Screen name="Article" component={Article} />*/}
       </Drawer.Navigator>
   );
@@ -29,7 +34,13 @@ function App() {
 
 
 
-
+export default function App() {
+  return (
+      <NavigationContainer>
+        <MyDrawer/>
+      </NavigationContainer>
+  );
+}
 
 
 
@@ -125,4 +136,4 @@ function App() {
 //   },
 // });
 
-export default App;
+// export default App;

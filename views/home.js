@@ -1,125 +1,122 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import SearchableDropdown from 'react-native-searchable-dropdown';
 import {
     Platform, StyleSheet, View, Text,
-    Image, TouchableOpacity, Alert, Dimensions, TextInput, KeyboardAvoidingView
+    Image, TouchableOpacity, Alert, Dimensions, TextInput, KeyboardAvoidingView,ImageBackground
 } from 'react-native';
 
-export default class Myapp extends Component
-{
 
-    constructor(){
-        super();
-        this.state={
-            isVisible : true,
+var items = [
+    {
+        id: 1,
+        name: 'JavaScript',
+    },
+    {
+        id: 2,
+        name: 'Java',
+    },
+    {
+        id: 3,
+        name: 'Ruby',
+    },
+    {
+        id: 4,
+        name: 'React Native',
+    },
+    {
+        id: 5,
+        name: 'PHP',
+    },
+    {
+        id: 6,
+        name: 'Python',
+    },
+    {
+        id: 7,
+        name: 'Go',
+    },
+    {
+        id: 8,
+        name: 'Swift',
+    },
+];
+export default class Home extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedItems: [
+                {
+                    id: 7,
+                    name: 'Go',
+                },
+                {
+                    id: 8,
+                    name: 'Swift',
+                }
+            ]
         }
     }
-    Hide_Splash_Screen=()=>{
-        this.setState({
-            isVisible : false
-        });
-    }
+    render() {
+        return (
 
-    componentDidMount(){
-        var that = this;
-        setTimeout(function(){
-            that.Hide_Splash_Screen();
-        }, 5000);
-    }
-    static navigationOptions = {
-        headerShown: false
 
-    };
-
-    render()
-    {
-        const windowWidth = Dimensions.get('window').width;
-        const windowHeight = Dimensions.get('window').height;
-        let Splash_Screen = (
-            <View style={styles.SplashScreen_RootView}>
-                <View style={styles.SplashScreen_ChildView}>
-                    <Image source={require('../assets/images/splash.png')}
-                           style={{width:windowWidth, height: windowHeight}} />
+            <Fragment>
+                <View style={{alignItems:"center"}}>
+                    <Image style={{
+                        width: 200,
+                        height: 200
+                    }} source={require('../assets/images/logo.png')}/>
                 </View>
-            </View>
-
-        )
-        return(
-            <View style = { styles.MainContainer }>
-                <KeyboardAvoidingView behavior={Platform.OS == "android" } style={{flex: 6, alignItems: 'center', width: Dimensions.get('window').width}}>
-                    <View style={{flex: 2,}}>
-                    </View>
-
-                    <View style={{flex: 3,}}>
-                        <Image style={{
-                            width: Dimensions.get('window').width,
-                            height: Dimensions.get('window').width / 1.3
-                        }} source={require('../assets/images/logo.png')}/>
-                    </View>
-                    <View style={{flex: 1,}}>
-                    </View>
-                    <View style={{
-                        // flex: 1,
-                        alignSelf: 'center',
-                        width: 170,
-                        height: 50,
-                        backgroundColor: "#107e7d",
-                        borderRadius: 15,
-                        shadowColor: "#000",
-                        shadowOffset: {
-                            width: 0,
-                            height: 0,
-                        },
-                        shadowOpacity: 0.34,
-                        shadowRadius: 6.27,
-
-                        elevation: 10,
-
-                    }}>
-                        <Text onPress={() => {
-                            this.props.navigation.push('OCR');
+                {/* Multi */}
+                <SearchableDropdown
+                    multi={true}
+                    selectedItems={this.state.selectedItems}
+                    onItemSelect={(item) => {
+                        const items = this.state.selectedItems;
+                        items.push(item)
+                        this.setState({ selectedItems: items });
+                    }}
+                    containerStyle={{ padding: 5 }}
+                    onRemoveItem={(item, index) => {
+                        const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
+                        this.setState({ selectedItems: items });
+                    }}
+                    itemStyle={{
+                        padding: 10,
+                        marginTop: 2,
+                        backgroundColor: '#ddd',
+                        borderColor: '#bbb',
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    }}
+                    itemTextStyle={{ color: '#222' }}
+                    itemsContainerStyle={{ maxHeight: 140 }}
+                    items={items}
+                    defaultIndex={2}
+                    chip={true}
+                    resetValue={false}
+                    textInputProps={
+                        {
+                            placeholder: "placeholder",
+                            underlineColorAndroid: "transparent",
+                            style: {
+                                padding: 12,
+                                borderWidth: 1,
+                                borderColor: '#ccc',
+                                borderRadius: 5,
+                            },
+                            // onTextChange: text => alert(text)
                         }
-                        } style={{textAlign: 'center', color: '#ffffff', fontWeight: "bold", marginTop: 3, fontSize:25}}>
-                            Start Now
-                        </Text>
+                    }
+                    listProps={
+                        {
+                            nestedScrollEnabled: true,
+                        }
+                    }
+                />
 
-                    </View>
-                    <View style={{flex: 1,}}>
-                    </View>
 
-                </KeyboardAvoidingView>
-
-                {
-                    (this.state.isVisible === true) ? Splash_Screen : null
-                }
-            </View>
+            </Fragment>
         );
     }
 }
-const styles = StyleSheet.create(
-    {
-        MainContainer:
-            {
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingTop: ( Platform.OS === 'ios' ) ? 20 : 0
-            },
-
-        SplashScreen_RootView:
-            {
-                justifyContent: 'center',
-                flex:1,
-                margin: 10,
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-            },
-
-        SplashScreen_ChildView:
-            {
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: '#ffffff',
-                flex:1,
-            },
-    });
