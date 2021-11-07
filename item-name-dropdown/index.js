@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 const defaultItemValue = {
-  itemName: '', id: 0
+  itemName: '', _id: 0
 };
 
 export default class SearchableDropDown extends Component {
@@ -78,7 +78,7 @@ export default class SearchableDropDown extends Component {
       return setSort(item, searchedText);
     });
     let item = {
-      id: -1,
+      _id: -1,
       itemName: searchedText
     };
     this.setState({ listItems: ac, item: item });
@@ -93,7 +93,7 @@ export default class SearchableDropDown extends Component {
   renderItems = (item, index) => {
     if(this.props.multi && this.props.selectedItems && this.props.selectedItems.length > 0) {
       return (
-          this.props.selectedItems.find(sitem => sitem.id === item.id)
+          this.props.selectedItems.find(sitem => sitem._id === item._id)
           ?
           <TouchableOpacity style={{ ...this.props.itemStyle, flex: 1, flexDirection: 'row' }}>
             <View style={{ flex: 0.9, flexDirection: 'row', alignItems: 'flex-start' }}>
@@ -136,7 +136,7 @@ export default class SearchableDropDown extends Component {
           }}
         >
           {
-            this.props.selectedItems && this.props.selectedItems.length > 0 && this.props.selectedItems.find(x => x.id === item.id)
+            this.props.selectedItems && this.props.selectedItems.length > 0 && this.props.selectedItems.find(x => x._id === item._id)
             ?
               <Text style={{ ...this.props.itemTextStyle }}>{item.itemName}</Text>
             :

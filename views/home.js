@@ -11,35 +11,35 @@ import {
 
 var items = [
     {
-        id: 1,
+        id: "1",
         itemName: 'JavaScript',
     },
     {
-        id: 200,
+        id: "200",
         itemName: 'Java',
     },
     {
-        id: 50,
+        id: "50",
         itemName: 'Ruby',
     },
     {
-        id: 10,
+        id: "10",
         itemName: 'React Native',
     },
     {
-        id: 20,
+        id: "20",
         itemName: 'PHP',
     },
     {
-        id: 2,
+        id: "2",
         itemName: 'Python',
     },
     {
-        id: 1,
+        id: "1",
         itemName: 'Go',
     },
     {
-        id: 8,
+        id: "8",
         itemName: 'Swift',
     },
 ];
@@ -179,7 +179,7 @@ export default class Home extends React.Component {
                     containerStyle={{ padding: 5 }}
                     onRemoveItem={(item, index) => {
 
-                        const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
+                        const items = this.state.selectedItems.filter((sitem) => sitem._id !== item._id);
                         this.setState({ selectedItems: items });
                     }}
                     itemStyle={{
@@ -192,8 +192,8 @@ export default class Home extends React.Component {
                     }}
                     itemTextStyle={{ color: '#222' }}
                     itemsContainerStyle={{ maxHeight: 140 }}
-                    // items={this.state.allItems}
-                    items={items}
+                    items={this.state.allItems}
+                    // items={items}
                     // defaultIndex={2}
                     chip={true}
                     resetValue={false}
@@ -208,7 +208,7 @@ export default class Home extends React.Component {
                                 borderRadius: 5,
                             },
 
-                            onTextChange: text => console.log(this.state.allItems)
+                            // onTextChange: text => console.log(this.state.allItems)
                         }
                     }
                     listProps={
