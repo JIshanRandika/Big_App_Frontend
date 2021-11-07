@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import SearchableDropdown from 'react-native-searchable-dropdown';
+import SearchableDropdown from '../item-name-dropdown/react-native-searchable-dropdown';
 import {
     Platform, StyleSheet, View, Text,
     Image, TouchableOpacity, Alert, Dimensions, TextInput, KeyboardAvoidingView,ImageBackground
