@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 const defaultItemValue = {
-  name: '', id: 0
+  itemName: '', id: 0
 };
 
 export default class SearchableDropDown extends Component {
@@ -30,7 +30,7 @@ export default class SearchableDropDown extends Component {
     if (this.state.focus) {
       const flatListPorps = { ...this.props.listProps };
       const oldSupport = [
-        { key: 'keyboardShouldPersistTaps', val: 'always' }, 
+        { key: 'keyboardShouldPersistTaps', val: 'always' },
         { key: 'nestedScrollEnabled', val : false },
         { key: 'style', val : { ...this.props.itemsContainerStyle } },
         { key: 'data', val : this.state.listItems },
@@ -70,8 +70,8 @@ export default class SearchableDropDown extends Component {
   searchedItems = searchedText => {
     let setSort = this.props.setSort;
     if (!setSort && typeof setSort !== 'function') {
-        setSort = (item, searchedText) => { 
-          return item.name.toLowerCase().indexOf(searchedText.toLowerCase()) > -1
+        setSort = (item, searchedText) => {
+          return item.itemName.toLowerCase().indexOf(searchedText.toLowerCase()) > -1
         };
     }
     var ac = this.props.items.filter((item) => {
@@ -79,7 +79,7 @@ export default class SearchableDropDown extends Component {
     });
     let item = {
       id: -1,
-      name: searchedText
+      itemName: searchedText
     };
     this.setState({ listItems: ac, item: item });
     const onTextChange = this.props.onTextChange || this.props.textInputProps.onTextChange || this.props.onChangeText || this.props.textInputProps.onChangeText;
@@ -93,11 +93,11 @@ export default class SearchableDropDown extends Component {
   renderItems = (item, index) => {
     if(this.props.multi && this.props.selectedItems && this.props.selectedItems.length > 0) {
       return (
-          this.props.selectedItems.find(sitem => sitem.id === item.id) 
-          ? 
+          this.props.selectedItems.find(sitem => sitem.id === item.id)
+          ?
           <TouchableOpacity style={{ ...this.props.itemStyle, flex: 1, flexDirection: 'row' }}>
             <View style={{ flex: 0.9, flexDirection: 'row', alignItems: 'flex-start' }}>
-              <Text>{ item.name }</Text>
+              <Text>{ item.itemName }</Text>
             </View>
             <View style={{ flex: 0.1, flexDirection: 'row', alignItems: 'flex-end' }}>
               <TouchableOpacity onPress={() => setTimeout(() => { this.props.onRemoveItem(item, index) }, 0) } style={{ backgroundColor: '#f16d6b', alignItems: 'center', justifyContent: 'center', width: 25, height: 25, borderRadius: 100, marginLeft: 10}}>
@@ -115,7 +115,7 @@ export default class SearchableDropDown extends Component {
           }}
           style={{ ...this.props.itemStyle, flex: 1, flexDirection: 'row' }}>
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-start' }}>
-              <Text>{ item.name }</Text>
+              <Text>{ item.itemName }</Text>
             </View>
           </TouchableOpacity>
       )
@@ -135,12 +135,12 @@ export default class SearchableDropDown extends Component {
             }, 0);
           }}
         >
-          { 
-            this.props.selectedItems && this.props.selectedItems.length > 0 && this.props.selectedItems.find(x => x.id === item.id) 
+          {
+            this.props.selectedItems && this.props.selectedItems.length > 0 && this.props.selectedItems.find(x => x.id === item.id)
             ?
-              <Text style={{ ...this.props.itemTextStyle }}>{item.name}</Text>
+              <Text style={{ ...this.props.itemTextStyle }}>{item.itemName}</Text>
             :
-              <Text style={{ ...this.props.itemTextStyle }}>{item.name}</Text>
+              <Text style={{ ...this.props.itemTextStyle }}>{item.itemName}</Text>
           }
         </TouchableOpacity>
       );
@@ -154,11 +154,11 @@ export default class SearchableDropDown extends Component {
   renderTextInput = () => {
     const textInputProps = { ...this.props.textInputProps };
     const oldSupport = [
-      { key: 'ref', val: e => (this.input = e) }, 
-      { key: 'onTextChange', val: (text) => { this.searchedItems(text) } }, 
-      { key: 'underlineColorAndroid', val: this.props.underlineColorAndroid }, 
-      { 
-        key: 'onFocus', 
+      { key: 'ref', val: e => (this.input = e) },
+      { key: 'onTextChange', val: (text) => { this.searchedItems(text) } },
+      { key: 'underlineColorAndroid', val: this.props.underlineColorAndroid },
+      {
+        key: 'onFocus',
         val: () => {
           this.props.onFocus && this.props.onFocus()
           this.setState({
@@ -166,8 +166,8 @@ export default class SearchableDropDown extends Component {
             item: defaultItemValue,
             listItems: this.props.items
           });
-        } 
-      }, 
+        }
+      },
       {
         key: 'onBlur',
         val: () => {
@@ -177,7 +177,7 @@ export default class SearchableDropDown extends Component {
       },
       {
         key: 'value',
-        val: this.state.item ? this.state.item.name : ''
+        val: this.state.item ? this.state.item.itemName : ''
       },
       {
         key: 'style',
@@ -241,7 +241,7 @@ export default class SearchableDropDown extends Component {
                  { items.map((item, index) => {
                      return (
                          <View key={index} style={{
-                                 width: (item.name.length * 8) + 60,
+                                 width: (item.itemName.length * 8) + 60,
                                  justifyContent: 'center',
                                  flex: 0,
                                  backgroundColor: '#eee',
@@ -251,13 +251,13 @@ export default class SearchableDropDown extends Component {
                                  padding: 8,
                                  borderRadius: 15,
                              }}>
-                             <Text style={{ color: '#555' }}>{item.name}</Text>
+                             <Text style={{ color: '#555' }}>{item.itemName}</Text>
                              <TouchableOpacity onPress={() => setTimeout(() => { this.props.onRemoveItem(item, index) }, 0) } style={{ backgroundColor: '#f16d6b', alignItems: 'center', justifyContent: 'center', width: 25, height: 25, borderRadius: 100, marginLeft: 10}}>
                                  <Text>X</Text>
                              </TouchableOpacity>
                          </View>
                  )
-             }) 
+             })
          }
          </View>
     }
