@@ -245,6 +245,24 @@ export default class SearchableDropDown extends Component {
     )
   }
 
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    const {order} = this.state;
+
+    await fetch('http://192.168.8.100:8080/api/order', {
+      method:'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(order),
+    });
+    // this.props.history.push('/profile');
+  }
+
+
+
   render = () => {
     return (
       <View
@@ -288,8 +306,16 @@ export default class SearchableDropDown extends Component {
         }/>
         <View><Text>{this.state.orderID}</Text></View>
 
+
+        <Button type="submit" color='blue' title='Confirm order'/>
       </View>
+
+
+
+
+
     );
+
   };
 
   printAitem(){

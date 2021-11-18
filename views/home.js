@@ -317,10 +317,10 @@ export default class Home extends React.Component {
                 {/*</View>*/}
 
 
-                <Button title='order' onPress={() =>
-                    console.log(this.state.selectedItems)
-                    //  this.itemList()
-                }/>
+                {/*<Button title='order' onPress={() =>*/}
+                {/*    console.log(this.state.selectedItems)*/}
+                {/*    //  this.itemList()*/}
+                {/*}/>*/}
 
 
 
