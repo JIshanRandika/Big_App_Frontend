@@ -1,54 +1,68 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment,useEffect} from 'react';
 import ItemDropdown from '../item-name-dropdown';
 
 import ShopDropdown from '../shop-name-dropdown';
 
 import {
     Platform, StyleSheet, View, Text,
-    Image, TouchableOpacity, Alert, Dimensions, TextInput, KeyboardAvoidingView,ImageBackground
+    Image, TouchableOpacity, Alert, Dimensions, TextInput, KeyboardAvoidingView, ImageBackground, Button
 } from 'react-native';
 
 
-// var items = [
-//     {
-//         id: "1",
-//         itemName: 'JavaScript',
-//     },
-//     {
-//         id: "200",
-//         itemName: 'Java',
-//     },
-//     {
-//         id: "50",
-//         itemName: 'Ruby',
-//     },
-//     {
-//         id: "10",
-//         itemName: 'React Native',
-//     },
-//     {
-//         id: "20",
-//         itemName: 'PHP',
-//     },
-//     {
-//         id: "2",
-//         itemName: 'Python',
-//     },
-//     {
-//         id: "1",
-//         itemName: 'Go',
-//     },
-//     {
-//         id: "8",
-//         itemName: 'Swift',
-//     },
-// ];
+var items = [
+    {
+        id: "1",
+        itemName: 'JavaScript',
+    },
+    {
+        id: "200",
+        itemName: 'Java',
+    },
+    {
+        id: "50",
+        itemName: 'Ruby',
+    },
+    {
+        id: "10",
+        itemName: 'React Native',
+    },
+    {
+        id: "20",
+        itemName: 'PHP',
+    },
+    {
+        id: "2",
+        itemName: 'Python',
+    },
+    {
+        id: "1",
+        itemName: 'Go',
+    },
+    {
+        id: "8",
+        itemName: 'Swift',
+    },
+];
 
 
 export default class Home extends React.Component {
+    ShowCurrentDate=()=>{
+
+        var date = new Date().getDate();
+        var month = new Date().getMonth() + 1;
+        var year = new Date().getFullYear();
+        var hours = new Date().getHours();
+        var min = new Date().getMinutes();
+        var sec = new Date().getSeconds();
+
+        console.log(date + '-' + month + '-' + year + ','+hours+':'+min+':'+sec+this.state.customerName)
+        // Alert.alert(date + '-' + month + '-' + year);
+
+    }
     constructor(props) {
         super(props);
         this.state = {
+            customerName:'1',
             newSelect:'Search by Shop',
             allShops:[],
             allItems:[],
@@ -77,10 +91,20 @@ export default class Home extends React.Component {
             .then(data => this.setState({allShops: data}));
 
         // fetch('https://healthyfoodssabra.herokuapp.com/api/products')
-            fetch('http://192.168.8.100:8080/api/items')
-            .then(response => response.json())
-            .then(data => this.setState({allItems: data}));
+        //     fetch('http://192.168.8.100:8080/api/items')
+        //     .then(response => response.json())
+        //     .then(data => this.setState({allItems: data}));
 
+
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ searchUsername: 'userone'})
+        // };
+        //
+        // fetch('http://192.168.8.100:8080/api/itemforuser',requestOptions)
+        //     .then(response => response.json())
+        //     .then(data => this.setState({allItems: data, isLoading: false}));
 
     }
 
@@ -152,6 +176,16 @@ export default class Home extends React.Component {
                     }
                 />
 
+                <Button title='load' onPress={() =>
+
+                    fetch('http://192.168.8.100:8080/api/itemforuser',{
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ searchUsername: this.state.newSelect})
+                    })
+                    .then(response => response.json())
+                    .then(data => this.setState({allItems: data, isLoading: false}))
+                }/>
 
                 {/*item dropdown=========================================================================*/}
                 {/* Multi */}
@@ -206,7 +240,23 @@ export default class Home extends React.Component {
                         }
                     }
                 />
+                <TextInput
+                    onChangeText={(value) => this.setState({customerName: value})}
+                    // onChangeText={this.state.customerName}
+                    // value={TextInput}
+                    placeholder="Enter Your Name"
+                />
+                <Button title='create order id' onPress={
+                    this.ShowCurrentDate
 
+                }/>
+
+                <View><Text></Text></View>
+
+                <Button title='order' onPress={() =>
+                    console.log(this.state.selectedItems[0].itemName)
+
+                }/>
 
             </Fragment>
         );
