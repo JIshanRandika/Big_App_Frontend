@@ -5,7 +5,7 @@ import ShopDropdown from '../shop-name-dropdown';
 
 import {
     Platform, StyleSheet, View, Text,
-    Image, TouchableOpacity, Alert, Dimensions, TextInput, KeyboardAvoidingView, ImageBackground, Button
+    Image, TouchableOpacity, Alert, Dimensions, TextInput, KeyboardAvoidingView, ImageBackground, Button,
 } from 'react-native';
 
 
@@ -46,26 +46,34 @@ var items = [
 
 
 export default class Home extends React.Component {
-    ShowCurrentDate=()=>{
-
-        var date = new Date().getDate();
-        var month = new Date().getMonth() + 1;
-        var year = new Date().getFullYear();
-        var hours = new Date().getHours();
-        var min = new Date().getMinutes();
-        var sec = new Date().getSeconds();
-
-        console.log(date + '-' + month + '-' + year + ','+hours+':'+min+':'+sec+this.state.customerName)
-        // Alert.alert(date + '-' + month + '-' + year);
-
-    }
+    // ShowCurrentDate=()=>{
+    //
+    //     var date = new Date().getDate();
+    //     var month = new Date().getMonth() + 1;
+    //     var year = new Date().getFullYear();
+    //     var hours = new Date().getHours();
+    //     var min = new Date().getMinutes();
+    //     var sec = new Date().getSeconds();
+    //
+    //     console.log(this.state.customerName + '-' + this.state.customerContact + '-' + date + '-' + month + '-' + year + ','+hours+':'+min+':'+sec)
+    //     // Alert.alert(date + '-' + month + '-' + year);
+    //     this.setState({ orderID:this.state.customerName + '-' + this.state.customerContact + '-' + date + '-' + month + '-' + year + ','+hours+':'+min+':'+sec})
+    //
+    //
+    //     console.log(this.state.Quantity)
+    //
+    //
+    // }
     constructor(props) {
         super(props);
         this.state = {
+            orderID:'',
             customerName:'1',
+            customerContact:'',
             newSelect:'Search by Shop',
             allShops:[],
             allItems:[],
+            Quantity:[],
             selectedItems: [
                 // {
                 //     id: 7,
@@ -109,21 +117,38 @@ export default class Home extends React.Component {
     }
 
 
+    itemList(){
+        // console.log('test')
+
+        // return(
+        //
+        //     <View><Button title='{testing}'/></View>
+        // );
+
+        for(let i=0; i<5; i++){
+            return(
+                <View><Text>as</Text></View>
+                );
+
+        }
+    }
 
 
 
 // ====================
     render() {
+
+
         return (
 
 
-            <Fragment>
-                <View style={{alignItems:"center"}}>
-                    <Image style={{
-                        width: 200,
-                        height: 200
-                    }} source={require('../assets/images/logo.png')}/>
-                </View>
+            <View>
+                {/*<View style={{alignItems:"center"}}>*/}
+                {/*    <Image style={{*/}
+                {/*        width: 200,*/}
+                {/*        height: 200*/}
+                {/*    }} source={require('../assets/images/logo.png')}/>*/}
+                {/*</View>*/}
 
 
                 {/*shop dropdown=========================================================================*/}
@@ -175,6 +200,7 @@ export default class Home extends React.Component {
                         }
                     }
                 />
+
 
                 <Button title='load' onPress={() =>
 
@@ -240,25 +266,69 @@ export default class Home extends React.Component {
                         }
                     }
                 />
-                <TextInput
-                    onChangeText={(value) => this.setState({customerName: value})}
-                    // onChangeText={this.state.customerName}
-                    // value={TextInput}
-                    placeholder="Enter Your Name"
-                />
-                <Button title='create order id' onPress={
-                    this.ShowCurrentDate
+                {/*<TextInput*/}
+                {/*    onChangeText={(value) => this.setState({customerName: value})}*/}
+                {/*    // onChangeText={this.state.customerName}*/}
+                {/*    // value={TextInput}*/}
+                {/*    placeholder="Enter Your Name"*/}
+                {/*/>*/}
 
-                }/>
 
-                <View><Text></Text></View>
+                {/*<TextInput*/}
+                {/*    onChangeText={(value) => this.setState({customerContact: value})}*/}
+                {/*    // onChangeText={this.state.customerName}*/}
+                {/*    // value={TextInput}*/}
+                {/*    placeholder="Enter Your Contact Number"*/}
+                {/*/>*/}
+                {/*<Button title='create order id' onPress={*/}
+                {/*    this.ShowCurrentDate*/}
+
+
+                {/*}/>*/}
+
+
+                {/*<View><Text>{this.state.orderID}</Text></View>*/}
+
+                {/*<View style={{flexDirection:'row'}}>*/}
+
+                {/*    <View style={{width:"50%",margin:5}}>*/}
+                {/*        <Text>Item Name</Text>*/}
+                {/*    </View>*/}
+                {/*    <View style={{width:"50%",margin:5}}>*/}
+                {/*        <Text>Quantity</Text>*/}
+                {/*    </View>*/}
+                {/*</View>*/}
+
+                {/*<View style={{flexDirection:'row'}}>*/}
+
+                {/*    <View style={{width:"50%",margin:5}}>*/}
+                {/*        <Text>{this.state.selectedItems.itemName}</Text>*/}
+                {/*    </View>*/}
+                {/*    <View style={{width:"50%",margin:5}}>*/}
+                {/*        <Text>Q</Text>*/}
+                {/*    </View>*/}
+                {/*</View>*/}
+
+
+
+
+                {/*<View>*/}
+                {/*    {this.itemList()}*/}
+                {/*</View>*/}
+
 
                 <Button title='order' onPress={() =>
-                    console.log(this.state.selectedItems[0].itemName)
-
+                    console.log(this.state.selectedItems)
+                    //  this.itemList()
                 }/>
 
-            </Fragment>
+
+
+            </View>
+
+
+
+
         );
     }
 }

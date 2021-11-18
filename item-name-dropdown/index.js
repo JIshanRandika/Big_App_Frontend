@@ -5,14 +5,34 @@ import {
   TextInput,
   View,
   TouchableOpacity,
-  Keyboard
+  Keyboard, Button
 } from 'react-native';
 
 const defaultItemValue = {
   itemName: '', _id: 0
 };
 
+var quantityList = []
+
 export default class SearchableDropDown extends Component {
+  ShowCurrentDate=()=>{
+
+    var date = new Date().getDate();
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+    var hours = new Date().getHours();
+    var min = new Date().getMinutes();
+    var sec = new Date().getSeconds();
+
+    console.log(this.state.customerName + '-' + this.state.customerContact + '-' + date + '-' + month + '-' + year + ','+hours+':'+min+':'+sec)
+    // Alert.alert(date + '-' + month + '-' + year);
+    this.setState({ orderID:this.state.customerName + '-' + this.state.customerContact + '-' + date + '-' + month + '-' + year + ','+hours+':'+min+':'+sec})
+
+
+    // console.log(this.state.Quantity)
+
+
+  }
   constructor(props) {
     super(props);
     this.renderTextInput = this.renderTextInput.bind(this);
@@ -20,6 +40,9 @@ export default class SearchableDropDown extends Component {
     this.searchedItems = this.searchedItems.bind(this);
     this.renderItems = this.renderItems.bind(this);
     this.state = {
+      orderID:'',
+      customerName:'1',
+      customerContact:'',
       item: {},
       listItems: [],
       focus: false
@@ -228,21 +251,66 @@ export default class SearchableDropDown extends Component {
         keyboardShouldPersist="always"
         style={{ ...this.props.containerStyle }}
       >
-        { this.renderSelectedItems() }
+
         { this.renderTextInput() }
         {this.renderListType()}
+        { this.renderSelectedItems() }
+
+
+        {/*<Button title="Qtest" onPress={() =>*/}
+        {/*    console.log(quantityList)*/}
+        {/*}*/}
+        {/*/>*/}
+        <View>
+          {/*<Text>{quantityList}</Text>*/}
+          { quantityList.map((item, key)=>(
+              <Text key={key} > { item } </Text>)
+          )}
+        </View>
+
+        {/*<View><Text></Text></View>*/}
+        <TextInput
+            onChangeText={(value) => this.setState({customerName: value})}
+            // onChangeText={this.state.customerName}
+            // value={TextInput}
+            placeholder="Enter Your Name"
+        />
+
+
+        <TextInput
+            onChangeText={(value) => this.setState({customerContact: value})}
+            // onChangeText={this.state.customerName}
+            // value={TextInput}
+            placeholder="Enter Your Contact Number"
+        />
+        <Button title='create order id' onPress={
+          this.ShowCurrentDate
+        }/>
+        <View><Text>{this.state.orderID}</Text></View>
+
       </View>
     );
   };
+
+  printAitem(){
+
+  }
+
   renderSelectedItems(){
+    var quantity='0';
+    var tester='';
     let items = this.props.selectedItems || [];
     if(items !== undefined && items.length > 0 && this.props.chip && this.props.multi){
-     return  <View style={{flexDirection: 'row',  flexWrap: 'wrap', paddingBottom: 10, marginTop: 5 }}>
+     return <View style={{flexDirection: 'row',  flexWrap: 'wrap', paddingBottom: 10, marginTop: 5 }}>
                  { items.map((item, index) => {
+
+
                      return (
+
                          <View key={index} style={{
-                                 width: (item.itemName.length * 8) + 60,
+                                 // width: (item.itemName.length * 8) + 60,
                                  justifyContent: 'center',
+                              width:'100%',
                                  flex: 0,
                                  backgroundColor: '#eee',
                                  flexDirection: 'row',
@@ -251,11 +319,71 @@ export default class SearchableDropDown extends Component {
                                  padding: 8,
                                  borderRadius: 15,
                              }}>
-                             <Text style={{ color: '#555' }}>{item.itemName}</Text>
-                             <TouchableOpacity onPress={() => setTimeout(() => { this.props.onRemoveItem(item, index) }, 0) } style={{ backgroundColor: '#f16d6b', alignItems: 'center', justifyContent: 'center', width: 25, height: 25, borderRadius: 100, marginLeft: 10}}>
-                                 <Text>X</Text>
-                             </TouchableOpacity>
+                             <Text style={{ color: '#555',width:'30%' }}>{item.itemName}</Text>
+                           <TextInput
+                               style={{borderWidth: 1}}
+                               onChangeText={(value) => quantity=value}
+                               // onTouchStart={quantity=''}
+                               // onContentSizeChange={(value) =>{
+                               //   quantityList.push(value)
+                               // }}
+                               // onEndEditing={text => quantityList.push(text)}
+                               // onEndEditing={(value) =>{
+                               //   quantityList.push(value)
+                               // }
+                               // }
+
+                               placeholder="Enter Quantity"
+                           />
+
+
+                           <Button
+                               title='delete'
+                               onPress={() => setTimeout(() => { this.props.onRemoveItem(item, index) }, 0) }
+                               color='red'
+                                   />
+
+                             {/*<TouchableOpacity onPress={() => setTimeout(() => { this.props.onRemoveItem(item, index) }, 0) } style={{ backgroundColor: '#f16d6b', alignItems: 'center', justifyContent: 'center', width: 25, height: 25, borderRadius: 100, marginLeft: 10}}>*/}
+                             {/*    <Text>X</Text>*/}
+                             {/*</TouchableOpacity>*/}
+                           {/*<View>*/}
+
+                           {/*<TouchableOpacity disabled={a} onPress={() => a=true}>*/}
+                           {/*  <Text>set</Text>*/}
+                           {/*</TouchableOpacity>*/}
+
+                             {/*<Button*/}
+
+                             {/*    title='test'*/}
+                             {/*    onPress={() =>*/}
+                             {/*    quantity=''*/}
+
+                             {/*     }*/}
+                             {/*/>*/}
+
+                           <Button
+
+                               title='Add to List'
+                               // onPress={() =>
+                               // console.log(item.itemName + ' - ' + quantity)
+                               //
+                               // }
+                               color='green'
+                               onPress={() =>
+                                   quantityList.push(item.itemName+' = '+quantity) &
+                                   setTimeout(() => { this.props.onRemoveItem(item, index) }, 0)
+                               }
+
+
+
+                           />
+
+
+
+                           {/*</View>*/}
+
                          </View>
+
                  )
              })
          }
