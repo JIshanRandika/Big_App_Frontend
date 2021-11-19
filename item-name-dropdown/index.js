@@ -41,6 +41,7 @@ export default class SearchableDropDown extends Component {
       orderID:'',
       customerName:'1',
       customerContact:'',
+      isOrderDisable: false,
       item: {},
       listItems: [],
       focus: false
@@ -50,7 +51,7 @@ export default class SearchableDropDown extends Component {
     const {order} = this.state;
     let items = this.props.items;
     console.log('as-'+this.state.selectedshopname)
-    for(let i=0; i<itemAndQuantityList.length; i++){
+    // for(let i=0; i<itemAndQuantityList.length; i++){
       fetch('http://192.168.8.101:8080/api/order', {
       method:'POST',
       headers: {
@@ -61,23 +62,27 @@ export default class SearchableDropDown extends Component {
       body: JSON.stringify({
         orderID:this.state.orderID,
         shopName:this.state.selectedshopname,
-        itemAndQuantity:itemAndQuantityList[i],
+        itemAndQuantity:itemAndQuantityList,
         acceptStatus:'waiting',
         readyStatus:'waiting',
         completeStatus:'waiting'
 
       }),
     });
-  }
+  // }
     if(itemAndQuantityList.length>0){
       alert('Successfully Completed')
     }else {
       alert('Please make your order')
     }
     itemAndQuantityList = []
+    this.setState({isOrderDisable: true})
+    this.setState({orderID: null})
   }
 
-
+  createNewOrder=()=>{
+    this.setState({isOrderDisable: false})
+  }
 
 
   renderFlatList = () => {
@@ -212,6 +217,7 @@ export default class SearchableDropDown extends Component {
   };
 
   renderTextInput = () => {
+
     const textInputProps = { ...this.props.textInputProps };
     const oldSupport = [
       { key: 'ref', val: e => (this.input = e) },
@@ -252,6 +258,7 @@ export default class SearchableDropDown extends Component {
         val: this.props.placeholder
       }
     ];
+
     oldSupport.forEach((kv) => {
       if(!Object.keys(textInputProps).includes(kv.key)) {
         if(kv.key === 'onTextChange' || kv.key === 'onChangeText') {
@@ -265,7 +272,9 @@ export default class SearchableDropDown extends Component {
         }
       }
     });
+
     return (
+
         <View>
           {/*<Button title='Reset' onPress={() =>*/}
           {/*    itemAndQuantityList = []*/}
@@ -309,10 +318,13 @@ export default class SearchableDropDown extends Component {
 
   render = () => {
     return (
+<View>
+  {!this.state.isOrderDisable && (
       <View
         keyboardShouldPersist="always"
         style={{ ...this.props.containerStyle }}
       >
+
 
         { this.renderTextInput() }
         {this.renderListType()}
@@ -353,8 +365,11 @@ export default class SearchableDropDown extends Component {
 
         <Button type="submit" color='blue' title='Confirm order'
 
+                // disabled={this.state.isOrderDisable}
                 onPress={
                   this.submitOrder
+                  // &
+                  // this.setState({isOrderDisable: true})
                 }
         />
 
@@ -363,8 +378,19 @@ export default class SearchableDropDown extends Component {
         {/*}/>*/}
         {/*<Button type="submit" color='blue' title='Confirm order'/>*/}
       </View>
+  )}
+  {this.state.isOrderDisable && (
+      <View style={{margin:100}}>
+        <Button type="submit" color='green' title='Create New Order' style={{margin:10}}
+                onPress={
+                  this.createNewOrder
 
+                }
+        />
+      </View>
 
+  )}
+</View>
 
 
 

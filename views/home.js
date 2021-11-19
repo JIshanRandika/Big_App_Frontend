@@ -151,6 +151,7 @@ export default class Home extends React.Component {
                 {/*</View>*/}
 
 
+                <View style={{alignItems:'center'}}>
                 {/*shop dropdown=========================================================================*/}
                 <ShopDropdown
                     onItemSelect={(shop) => {
@@ -162,8 +163,16 @@ export default class Home extends React.Component {
                         this.setState({ newSelect:shop.username})
                         this.setState({ selectedShops: shops });
 
+                        fetch('http://192.168.8.101:8080/api/availableitemforuser',{
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ searchUsername: this.state.newSelect})
+                        })
+                            .then(response => response.json())
+                            .then(data => this.setState({allItems: data, isLoading: false}))
+
                     }}
-                    containerStyle={{ padding: 5, width: "75%" }}
+                    containerStyle={{ padding: 5, width: "90%" }}
                     onRemoveItem={(shop, index) => {
                         const shops = this.state.selectedItems.filter((sitem) => sitem.id !== shop.id);
                         this.setState({ selectedShops: shops });
@@ -186,9 +195,10 @@ export default class Home extends React.Component {
                             placeholder: this.state.newSelect,
                             underlineColorAndroid: "transparent",
                             style: {
+
                                 padding: 12,
                                 borderWidth: 1,
-                                borderColor: '#592828',
+                                borderColor: '#0056ff',
                                 borderRadius: 5,
                             },
                             // onTextChange: text => alert(text)
@@ -200,18 +210,18 @@ export default class Home extends React.Component {
                         }
                     }
                 />
+                </View>
 
+                {/*<Button title='load' onPress={() =>*/}
 
-                <Button title='load' onPress={() =>
-
-                    fetch('http://192.168.8.101:8080/api/availableitemforuser',{
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ searchUsername: this.state.newSelect})
-                    })
-                    .then(response => response.json())
-                    .then(data => this.setState({allItems: data, isLoading: false}))
-                }/>
+                {/*    fetch('http://192.168.8.101:8080/api/availableitemforuser',{*/}
+                {/*        method: 'POST',*/}
+                {/*        headers: { 'Content-Type': 'application/json' },*/}
+                {/*        body: JSON.stringify({ searchUsername: this.state.newSelect})*/}
+                {/*    })*/}
+                {/*    .then(response => response.json())*/}
+                {/*    .then(data => this.setState({allItems: data, isLoading: false}))*/}
+                {/*}/>*/}
 
                 {/*item dropdown=========================================================================*/}
                 {/* Multi */}
