@@ -204,7 +204,7 @@ export default class Home extends React.Component {
 
                 <Button title='load' onPress={() =>
 
-                    fetch('http://192.168.8.101:8080/api/itemforuser',{
+                    fetch('http://192.168.8.101:8080/api/availableitemforuser',{
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ searchUsername: this.state.newSelect})
