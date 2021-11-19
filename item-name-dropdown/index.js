@@ -13,7 +13,7 @@ const defaultItemValue = {
 };
 
 
-var itemAndQuantityList = []
+var  itemAndQuantityList = []
 
 export default class SearchableDropDown extends Component {
   createOrderID=()=>{
@@ -68,9 +68,14 @@ export default class SearchableDropDown extends Component {
 
       }),
     });
-
-
-  }}
+  }
+    if(itemAndQuantityList.length>0){
+      alert('Successfully Completed')
+    }else {
+      alert('Please make your order')
+    }
+    itemAndQuantityList = []
+  }
 
 
 
@@ -261,19 +266,26 @@ export default class SearchableDropDown extends Component {
       }
     });
     return (
-      <TextInput
-      { ...textInputProps }
-      onBlur={(e) => {
-        if (this.props.onBlur) {
-          this.props.onBlur(e);
-        }
-        if (this.props.textInputProps && this.props.textInputProps.onBlur) {
-          this.props.textInputProps.onBlur(e);
-        }
-        this.setState({ focus: false, item: this.props.selectedItems });
-      }
-      }
-      />
+        <View>
+          {/*<Button title='Reset' onPress={() =>*/}
+          {/*    itemAndQuantityList = []*/}
+
+          {/*}/>*/}
+          <TextInput
+              { ...textInputProps }
+              onBlur={(e) => {
+                if (this.props.onBlur) {
+                  this.props.onBlur(e);
+                }
+                if (this.props.textInputProps && this.props.textInputProps.onBlur) {
+                  this.props.textInputProps.onBlur(e);
+                }
+                this.setState({ focus: false, item: this.props.selectedItems });
+              }
+              }
+          />
+        </View>
+
     )
   }
 
@@ -312,7 +324,7 @@ export default class SearchableDropDown extends Component {
         {/*}*/}
         {/*/>*/}
         <View>
-          {/*<Text>{quantityList}</Text>*/}
+
           { itemAndQuantityList.map((item, key)=>(
               <Text key={key} > { item } </Text>)
           )}
@@ -345,6 +357,10 @@ export default class SearchableDropDown extends Component {
                   this.submitOrder
                 }
         />
+
+        {/*<Button title='Reset' onPress={() =>*/}
+        {/*    itemAndQuantityList = []*/}
+        {/*}/>*/}
         {/*<Button type="submit" color='blue' title='Confirm order'/>*/}
       </View>
 
