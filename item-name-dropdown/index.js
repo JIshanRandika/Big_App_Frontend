@@ -12,10 +12,11 @@ const defaultItemValue = {
   itemName: '', _id: 0
 };
 
-var quantityList = []
+
+var itemAndQuantityList = []
 
 export default class SearchableDropDown extends Component {
-  ShowCurrentDate=()=>{
+  createOrderID=()=>{
 
     var date = new Date().getDate();
     var month = new Date().getMonth() + 1;
@@ -28,10 +29,6 @@ export default class SearchableDropDown extends Component {
     // Alert.alert(date + '-' + month + '-' + year);
     this.setState({ orderID:this.state.customerName + '-' + this.state.customerContact + '-' + date + '-' + month + '-' + year + ','+hours+':'+min+':'+sec})
 
-
-    // console.log(this.state.Quantity)
-
-
   }
   constructor(props) {
     super(props);
@@ -40,6 +37,7 @@ export default class SearchableDropDown extends Component {
     this.searchedItems = this.searchedItems.bind(this);
     this.renderItems = this.renderItems.bind(this);
     this.state = {
+      selectedshopname:'a',
       orderID:'',
       customerName:'1',
       customerContact:'',
@@ -48,6 +46,33 @@ export default class SearchableDropDown extends Component {
       focus: false
     };
   }
+  submitOrder=()=>{
+    const {order} = this.state;
+    let items = this.props.items;
+    console.log('as-'+this.state.selectedshopname)
+    for(let i=0; i<itemAndQuantityList.length; i++){
+      fetch('http://192.168.8.101:8080/api/order', {
+      method:'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+
+      body: JSON.stringify({
+        orderID:this.state.orderID,
+        shopName:this.state.selectedshopname,
+        itemAndQuantity:itemAndQuantityList[i],
+        acceptStatus:'waiting',
+        completeStatus:'waiting'
+
+      }),
+    });
+
+
+  }}
+
+
+
 
   renderFlatList = () => {
     if (this.state.focus) {
@@ -78,8 +103,13 @@ export default class SearchableDropDown extends Component {
   };
 
   componentDidMount = () => {
+
     const listItems = this.props.items;
+// console.log(listItems)
+    // const selectedshopname=this.props.newSelect
+
     const defaultIndex = this.props.defaultIndex;
+    // this.setState({selectedshopname:selectedshopname})
     if (defaultIndex && listItems.length > defaultIndex) {
       this.setState({
         listItems,
@@ -102,7 +132,8 @@ export default class SearchableDropDown extends Component {
     });
     let item = {
       _id: -1,
-      itemName: searchedText
+      itemName: searchedText,
+      username:searchedText
     };
     this.setState({ listItems: ac, item: item });
     const onTextChange = this.props.onTextChange || this.props.textInputProps.onTextChange || this.props.onChangeText || this.props.textInputProps.onChangeText;
@@ -246,20 +277,20 @@ export default class SearchableDropDown extends Component {
   }
 
 
-  async handleSubmit(event) {
-    event.preventDefault();
-    const {order} = this.state;
-
-    await fetch('http://192.168.8.100:8080/api/order', {
-      method:'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(order),
-    });
-    // this.props.history.push('/profile');
-  }
+  // async handleSubmit(event) {
+  //   event.preventDefault();
+  //   const {order} = this.state;
+  //
+  //   await fetch('http://192.168.8.100:8080/api/order', {
+  //     method:'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(order),
+  //   });
+  //   // this.props.history.push('/profile');
+  // }
 
 
 
@@ -281,7 +312,7 @@ export default class SearchableDropDown extends Component {
         {/*/>*/}
         <View>
           {/*<Text>{quantityList}</Text>*/}
-          { quantityList.map((item, key)=>(
+          { itemAndQuantityList.map((item, key)=>(
               <Text key={key} > { item } </Text>)
           )}
         </View>
@@ -302,12 +333,18 @@ export default class SearchableDropDown extends Component {
             placeholder="Enter Your Contact Number"
         />
         <Button title='create order id' onPress={
-          this.ShowCurrentDate
+          this.createOrderID
         }/>
         <View><Text>{this.state.orderID}</Text></View>
 
 
-        <Button type="submit" color='blue' title='Confirm order'/>
+        <Button type="submit" color='blue' title='Confirm order'
+
+                onPress={
+                  this.submitOrder
+                }
+        />
+        {/*<Button type="submit" color='blue' title='Confirm order'/>*/}
       </View>
 
 
@@ -396,7 +433,8 @@ export default class SearchableDropDown extends Component {
                                // }
                                color='green'
                                onPress={() =>
-                                   quantityList.push(item.itemName+' = '+quantity) &
+                                   itemAndQuantityList.push(item.itemName+' = '+quantity) &
+                                   this.setState({selectedshopname:item.username})&
                                    setTimeout(() => { this.props.onRemoveItem(item, index) }, 0)
                                }
 
