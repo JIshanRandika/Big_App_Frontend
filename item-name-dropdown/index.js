@@ -63,6 +63,7 @@ export default class SearchableDropDown extends Component {
         shopName:this.state.selectedshopname,
         itemAndQuantity:itemAndQuantityList[i],
         acceptStatus:'waiting',
+        readyStatus:'waiting',
         completeStatus:'waiting'
 
       }),
