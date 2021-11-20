@@ -1,6 +1,6 @@
 import React, { Component, Fragment,useEffect} from 'react';
 import ItemDropdown from '../item-name-dropdown';
-
+import * as Progress from 'react-native-progress';
 import ShopDropdown from '../shop-name-dropdown';
 
 import {
@@ -57,6 +57,7 @@ export default class CreatOrderView extends React.Component {
             allShops:[],
             allItems:[],
             Quantity:[],
+            isLoading:true,
             selectedItems: [
 
             ],
@@ -65,13 +66,18 @@ export default class CreatOrderView extends React.Component {
             ]
         }
     }
+
+
+
     // ========================
     componentDidMount() {
-        this.setState({isLoading: true});
+
+
 
         fetch('https://bigdealershipbackend.herokuapp.com/api/shops')
             .then(response => response.json())
-            .then(data => this.setState({allShops: data}));
+            .then(data => this.setState({allShops: data}))
+            .then(()=>this.setState({isLoading:false}));
 
 
 
@@ -99,6 +105,7 @@ export default class CreatOrderView extends React.Component {
 
             <KeyboardAvoidingView>
             <View>
+
                 <View style={{alignItems:'center'}}>
                 <View style={{flexDirection: 'row',alignItems:'center'}}>
 
@@ -139,7 +146,20 @@ export default class CreatOrderView extends React.Component {
 
                 </View>
                 <View style={{alignItems:'center'}}>
+                    {this.state.isLoading && (
+                        <View>
+                            <View>
+                                <Progress.CircleSnail color={['red', 'green', 'blue']} />
+                            </View>
+                            <View style={{marginTop:10}}>
+                                <Text>Loading...</Text>
+                            </View>
+                        </View>
+
+
+                    )}
                 {/*shop dropdown=========================================================================*/}
+                    {!this.state.isLoading && (
                 <ShopDropdown
                     onItemSelect={(shop) => {
                         console.log("testing")
@@ -197,6 +217,7 @@ export default class CreatOrderView extends React.Component {
                         }
                     }
                 />
+                    )}
                 </View>
 
 

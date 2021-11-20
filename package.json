@@ -21,9 +21,11 @@
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-navigation-drawer-extension": "^4.2.0",
+    "react-native-progress": "^5.0.0",
     "react-native-reanimated": "^2.2.3",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.9.0",
+    "react-native-svg": "^12.1.1",
     "react-native-vector-icons": "^9.0.0",
     "react-router-dom": "^6.0.2",
     "react-validation": "^3.0.7"
