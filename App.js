@@ -4,138 +4,93 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import type {Node} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
+    Image,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    useColorScheme,
+    View,
 } from 'react-native';
 
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {Ionicons} from 'react-native-vector-icons';
+import { Icon } from 'react-native-elements';
+import { StepBackwardOutlined } from '@ant-design/icons';
 
-
-
-import Home from './views/home'
+import CreatOrderView from './views/creatOrder.view'
 import TrackOrderView from './views/trackOrder.view'
+import HomeView from './views/home.view'
 
 
 const Drawer = createDrawerNavigator();
 
-function MyDrawer() {
+const Tab = createBottomTabNavigator();
+function MyNavigation() {
   return (
-      <Drawer.Navigator>
-        <Drawer.Screen name="Order Creator" component={Home} />
-          <Drawer.Screen name="Order Tracker" component={TrackOrderView} />
-        {/*<Drawer.Screen name="Article" component={Article} />*/}
-      </Drawer.Navigator>
+
+      // <Tab.Navigator initialRouteName="Home">
+      <Tab.Navigator
+          initialRouteName="Home"
+          screenOptions={({ route }) => ({
+              tabBarIcon: ({ focused, color, size }) => {
+                  let iconName;
+
+                  if (route.name === 'Home') {
+                      iconName = focused
+                          ? 'rowing'
+                          : 'rowing';
+                  } else if (route.name === 'Order Creator') {
+                      iconName = focused ? 'rowing' : 'rowing';
+
+                  } else if (route.name === 'Order Tracker') {
+                      iconName = focused ? 'rowing' : 'rowing';
+                  }
+// ==========color
+                  if (route.name === 'Home') {
+                      color = focused
+                          ? '#0356fc'
+                          : 'gray';
+                  } else if (route.name === 'Order Creator') {
+                      color = focused ? '#0356fc' : 'gray';
+
+                  } else if (route.name === 'Order Tracker') {
+                      color = focused ? '#0356fc' : 'gray';
+                  }
+
+                  // You can return any component that you like here!
+                  return <Icon name={iconName} color={color}/>;
+              },
+              tabBarActiveTintColor: '#0356fc',
+              tabBarInactiveTintColor: 'gray',
+          })}
+      >
+          <Tab.Screen name="Order Tracker" component={TrackOrderView} />
+          <Tab.Screen name="Home" component={HomeView} />
+          <Tab.Screen name="Order Creator" component={CreatOrderView} />
+
+      </Tab.Navigator>
+      // <Drawer.Navigator>
+      //
+      //
+      //     <Drawer.Screen name="Home" component={HomeView} />
+      //     <Drawer.Screen name="Order Creator" component={CreatOrderView} />
+      //     <Drawer.Screen name="Order Tracker" component={TrackOrderView} />
+      //   {/*<Drawer.Screen name="Article" component={Article} />*/}
+      // </Drawer.Navigator>
   );
 }
-
 
 
 export default function App() {
   return (
       <NavigationContainer>
-        <MyDrawer/>
+        <MyNavigation/>
       </NavigationContainer>
   );
 }
 
 
-
-
-// import {
-//   Colors,
-//   DebugInstructions,
-//   Header,
-//   LearnMoreLinks,
-//   ReloadInstructions,
-// } from 'react-native/Libraries/NewAppScreen';
-//
-// const Section = ({children, title}): Node => {
-//   const isDarkMode = useColorScheme() === 'dark';
-//   return (
-//     <View style={styles.sectionContainer}>
-//       <Text
-//         style={[
-//           styles.sectionTitle,
-//           {
-//             color: isDarkMode ? Colors.white : Colors.black,
-//           },
-//         ]}>
-//         {title}
-//       </Text>
-//       <Text
-//         style={[
-//           styles.sectionDescription,
-//           {
-//             color: isDarkMode ? Colors.light : Colors.dark,
-//           },
-//         ]}>
-//         {children}
-//       </Text>
-//     </View>
-//   );
-// };
-//
-// const App: () => Node = () => {
-//   const isDarkMode = useColorScheme() === 'dark';
-//
-//   const backgroundStyle = {
-//     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-//   };
-//
-//   return (
-//     <SafeAreaView style={backgroundStyle}>
-//       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-//       <ScrollView
-//         contentInsetAdjustmentBehavior="automatic"
-//         style={backgroundStyle}>
-//         <Header />
-//         <View
-//           style={{
-//             backgroundColor: isDarkMode ? Colors.black : Colors.white,
-//           }}>
-//           <Section title="Step One">
-//             Edit <Text style={styles.highlight}>App.js</Text> to change this
-//             screen and then come back to see your edits.
-//           </Section>
-//           <Section title="See Your Changes">
-//             <ReloadInstructions />
-//           </Section>
-//           <Section title="Debug">
-//             <DebugInstructions />
-//           </Section>
-//           <Section title="Learn More">
-//             Read the docs to discover what to do next:
-//           </Section>
-//           <LearnMoreLinks />
-//         </View>
-//       </ScrollView>
-//     </SafeAreaView>
-//   );
-// };
-//
-// const styles = StyleSheet.create({
-//   sectionContainer: {
-//     marginTop: 32,
-//     paddingHorizontal: 24,
-//   },
-//   sectionTitle: {
-//     fontSize: 24,
-//     fontWeight: '600',
-//   },
-//   sectionDescription: {
-//     marginTop: 8,
-//     fontSize: 18,
-//     fontWeight: '400',
-//   },
-//   highlight: {
-//     fontWeight: '700',
-//   },
-// });
-
-// export default App;

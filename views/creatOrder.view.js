@@ -45,7 +45,7 @@ var items = [
 ];
 
 
-export default class Home extends React.Component {
+export default class CreatOrderView extends React.Component {
     // ShowCurrentDate=()=>{
     //
     //     var date = new Date().getDate();
