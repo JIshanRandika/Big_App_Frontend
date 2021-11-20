@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component,useState } from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   Text,
   FlatList,
   TextInput,
   View,
   TouchableOpacity,
-  Keyboard, Button
+  Keyboard, Button, Platform
 } from 'react-native';
 
 const defaultItemValue = {
@@ -16,6 +17,7 @@ const defaultItemValue = {
 var  itemAndQuantityList = []
 
 export default class SearchableDropDown extends Component {
+
   createOrderID=()=>{
 
     var date = new Date().getDate();
@@ -40,6 +42,7 @@ export default class SearchableDropDown extends Component {
       selectedshopname:'a',
       orderID:'',
       orderSecretCode:'',
+      orderDescription:'',
       customerName:'1',
       customerContact:'',
       isOrderDisable: false,
@@ -68,7 +71,8 @@ export default class SearchableDropDown extends Component {
         readyStatus:'waiting',
         completeStatus:'waiting',
         orderSecretCode:this.state.orderSecretCode,
-        customerContact:this.state.customerContact
+        customerContact:this.state.customerContact,
+        orderDescription:this.state.orderDescription
 
       }),
     });
@@ -117,6 +121,13 @@ export default class SearchableDropDown extends Component {
   };
 
   componentDidMount = () => {
+
+
+
+
+
+    // =======================
+
 
     const listItems = this.props.items;
 // console.log(listItems)
@@ -218,6 +229,24 @@ export default class SearchableDropDown extends Component {
   renderListType = () => {
     return this.renderFlatList();
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   renderTextInput = () => {
 
@@ -373,7 +402,12 @@ export default class SearchableDropDown extends Component {
         }/>
         <View><Text>{this.state.orderID}</Text></View>
 
-
+        <TextInput
+            onChangeText={(value) => this.setState({orderDescription: value})}
+            // onChangeText={this.state.customerName}
+            // value={TextInput}
+            placeholder="Description"
+        />
         <Button type="submit" color='blue' title='Confirm order'
 
                 // disabled={this.state.isOrderDisable}
