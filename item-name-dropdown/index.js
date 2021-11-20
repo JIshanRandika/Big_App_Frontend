@@ -6,7 +6,7 @@ import {
   TextInput,
   View,
   TouchableOpacity,
-  Keyboard, Button, Platform,SafeAreaView, ScrollView
+  Keyboard, Button, Platform,SafeAreaView, ScrollView,KeyboardAvoidingView,TouchableWithoutFeedback
 } from 'react-native';
 
 const defaultItemValue = {
@@ -353,34 +353,39 @@ export default class SearchableDropDown extends Component {
 
   render = () => {
     return (
+        <KeyboardAvoidingView
+            behavior='position'
+            // style={styles.container}
+        >
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 <View>
   {!this.state.isOrderDisable && (
+
       <View
         keyboardShouldPersist="always"
         style={{ ...this.props.containerStyle }}
       >
 
+        {!this.state.isOrderIDCreated && (
+        <View>
+
 
         { this.renderTextInput() }
         {this.renderListType()}
         { this.renderSelectedItems() }
-
-
+        </View>
+        )}
         {/*<Button title="Qtest" onPress={() =>*/}
         {/*    console.log(quantityList)*/}
         {/*}*/}
         {/*/>*/}
-        <SafeAreaView style={{height:80}}>
-          <ScrollView>
-            <View>
-              { itemAndQuantityList.map((item, key)=>(
-                  <Text style={{fontWeight:'bold',color:'#2892D7'}} key={key} > { item } </Text>)
-              )}
-            </View>
-          </ScrollView>
-        </SafeAreaView>
 
-        {/*<View><Text></Text></View>*/}
+
+
+
+
+        {!this.state.isOrderIDCreated && (
+            <View>
         <TextInput
             style={{
               marginVertical:5,
@@ -422,6 +427,7 @@ export default class SearchableDropDown extends Component {
             // value={TextInput}
             placeholder="Enter a secrete code to track your order"
         />
+
         <View style={{marginVertical:5}}>
         <Button color='#2892D7' title='create order id' onPress={
           this.createOrderID
@@ -434,7 +440,8 @@ export default class SearchableDropDown extends Component {
           </View>
 
         </View>
-
+            </View>
+        )}
         {this.state.isOrderIDCreated && (
             <View>
               <TextInput
@@ -465,7 +472,15 @@ export default class SearchableDropDown extends Component {
             </View>
             </View>
         )}
-
+        <SafeAreaView style={{height:80}}>
+          <ScrollView>
+            <View>
+              { itemAndQuantityList.map((item, key)=>(
+                  <Text style={{fontWeight:'bold',color:'#2892D7'}} key={key} > { item } </Text>)
+              )}
+            </View>
+          </ScrollView>
+        </SafeAreaView>
 
 
         {/*<Button title='Reset' onPress={() =>*/}
@@ -485,8 +500,10 @@ export default class SearchableDropDown extends Component {
       </View>
 
   )}
-</View>
 
+</View>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
 
 
     );

@@ -141,7 +141,7 @@ export default class CreatOrderView extends React.Component {
 
         return (
 
-
+            <KeyboardAvoidingView>
             <View>
                 <View style={{alignItems:'center'}}>
                 <View style={{flexDirection: 'row',alignItems:'center'}}>
@@ -229,7 +229,7 @@ export default class CreatOrderView extends React.Component {
 
                                 padding: 12,
                                 borderWidth: 1,
-                                borderColor: '#2892D7',
+                                borderColor: '#3d3d3d',
                                 borderRadius: 5,
                             },
                             // onTextChange: text => alert(text)
@@ -366,7 +366,7 @@ export default class CreatOrderView extends React.Component {
 
             </View>
 
-
+            </KeyboardAvoidingView>
 
 
         );

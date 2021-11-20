@@ -52,19 +52,19 @@ function MyNavigation() {
 // ==========color
                   if (route.name === 'Home') {
                       color = focused
-                          ? '#0356fc'
+                          ? '#2892D7'
                           : 'gray';
                   } else if (route.name === 'Order Creator') {
-                      color = focused ? '#0356fc' : 'gray';
+                      color = focused ? '#2892D7' : 'gray';
 
                   } else if (route.name === 'Order Tracker') {
-                      color = focused ? '#0356fc' : 'gray';
+                      color = focused ? '#2892D7' : 'gray';
                   }
 
                   // You can return any component that you like here!
                   return <Icon name={iconName} color={color}/>;
               },
-              tabBarActiveTintColor: '#0356fc',
+              tabBarActiveTintColor: '#2892D7',
               tabBarInactiveTintColor: 'gray',
           })}
       >
