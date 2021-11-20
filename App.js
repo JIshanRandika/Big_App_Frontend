@@ -19,6 +19,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 
 import Home from './views/home'
+import TrackOrderView from './views/trackOrder.view'
 
 
 const Drawer = createDrawerNavigator();
@@ -26,7 +27,8 @@ const Drawer = createDrawerNavigator();
 function MyDrawer() {
   return (
       <Drawer.Navigator>
-        <Drawer.Screen name="Feed" component={Home} />
+        <Drawer.Screen name="Order Creator" component={Home} />
+          <Drawer.Screen name="Order Tracker" component={TrackOrderView} />
         {/*<Drawer.Screen name="Article" component={Article} />*/}
       </Drawer.Navigator>
   );

@@ -39,6 +39,7 @@ export default class SearchableDropDown extends Component {
     this.state = {
       selectedshopname:'a',
       orderID:'',
+      orderSecretCode:'',
       customerName:'1',
       customerContact:'',
       isOrderDisable: false,
@@ -65,7 +66,9 @@ export default class SearchableDropDown extends Component {
         itemAndQuantity:itemAndQuantityList,
         acceptStatus:'waiting',
         readyStatus:'waiting',
-        completeStatus:'waiting'
+        completeStatus:'waiting',
+        orderSecretCode:this.state.orderSecretCode,
+        customerContact:this.state.customerContact
 
       }),
     });
@@ -357,6 +360,14 @@ export default class SearchableDropDown extends Component {
             // value={TextInput}
             placeholder="Enter Your Contact Number"
         />
+
+        <TextInput
+            onChangeText={(value) => this.setState({orderSecretCode: value})}
+            // onChangeText={this.state.customerName}
+            // value={TextInput}
+            placeholder="Enter a secrete code to track your order"
+        />
+
         <Button title='create order id' onPress={
           this.createOrderID
         }/>
