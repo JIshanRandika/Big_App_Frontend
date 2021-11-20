@@ -36,6 +36,21 @@ export default class TrackOrderView extends React.Component {
             .then(data => this.setState({orderData: data}))
             .then(data =>console.log(this.state.orderData))
     }
+    async remove(id) {
+        await fetch(`http://192.168.8.101:8080/api/order/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            this.getOrderDetail
+            console.log("Remove Done!");
+            let updatedItems = [...this.state.items].filter(i => i._id !== id);
+            this.setState({items: updatedItems});
+
+        });
+    }
 
     render() {
         return (
@@ -117,7 +132,8 @@ export default class TrackOrderView extends React.Component {
                         this.getOrderDetail
                     }/>
                 </View>
-
+                <SafeAreaView style={{height:"65%"}}>
+                    <ScrollView>
 
                         { this.state.orderData.map((item, index) => {
                             return(
@@ -166,7 +182,11 @@ export default class TrackOrderView extends React.Component {
                                                     >
                                                         <Text style={{color:'white', fontWeight:'bold'}}>Waiting</Text>
                                                     </View>
-
+                                                    <Button
+                                                        color='red'
+                                                        onPress={() => this.remove(item._id) & this.getOrderDetail}
+                                                        title="Delete"
+                                                    />
                                                 </View>
 
                                             )}
@@ -218,7 +238,11 @@ export default class TrackOrderView extends React.Component {
                                                     >
                                                         <Text style={{color:'white', fontWeight:'bold'}}>Completed</Text>
                                                     </View>
-
+                                                    <Button
+                                                        color='red'
+                                                        onPress={() => this.remove(item._id) & this.getOrderDetail}
+                                                        title="Delete"
+                                                    />
                                                 </View>
 
                                             )}
@@ -229,7 +253,8 @@ export default class TrackOrderView extends React.Component {
                             )
 
                         })}
-
+                    </ScrollView>
+                </SafeAreaView>
 
 
 
