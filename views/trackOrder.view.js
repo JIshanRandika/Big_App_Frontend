@@ -258,9 +258,6 @@ export default class TrackOrderView extends React.Component {
 
 
 
-
-
-
             </View>
         )
     }

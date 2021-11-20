@@ -1,5 +1,4 @@
 import React, { Component,useState } from 'react';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   Text,
   FlatList,
@@ -334,21 +333,6 @@ export default class SearchableDropDown extends Component {
   }
 
 
-  // async handleSubmit(event) {
-  //   event.preventDefault();
-  //   const {order} = this.state;
-  //
-  //   await fetch('http://192.168.8.100:8080/api/order', {
-  //     method:'POST',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(order),
-  //   });
-  //   // this.props.history.push('/profile');
-  // }
-
 
 
   render = () => {
@@ -375,12 +359,6 @@ export default class SearchableDropDown extends Component {
         { this.renderSelectedItems() }
         </View>
         )}
-        {/*<Button title="Qtest" onPress={() =>*/}
-        {/*    console.log(quantityList)*/}
-        {/*}*/}
-        {/*/>*/}
-
-
 
 
 
@@ -395,8 +373,7 @@ export default class SearchableDropDown extends Component {
               borderRadius: 5,}}
 
             onChangeText={(value) => this.setState({customerName: value})}
-            // onChangeText={this.state.customerName}
-            // value={TextInput}
+
             placeholder="Enter Your Name"
         />
 
@@ -410,8 +387,7 @@ export default class SearchableDropDown extends Component {
               borderRadius: 5,}}
 
             onChangeText={(value) => this.setState({customerContact: value})}
-            // onChangeText={this.state.customerName}
-            // value={TextInput}
+
             placeholder="Enter Your Contact Number"
         />
 
@@ -423,8 +399,7 @@ export default class SearchableDropDown extends Component {
               borderColor: '#2892D7',
               borderRadius: 5,}}
             onChangeText={(value) => this.setState({orderSecretCode: value})}
-            // onChangeText={this.state.customerName}
-            // value={TextInput}
+
             placeholder="Enter a secrete code to track your order"
         />
 
@@ -453,8 +428,7 @@ export default class SearchableDropDown extends Component {
                     borderRadius: 5,}}
 
                   onChangeText={(value) => this.setState({orderDescription: value})}
-                  // onChangeText={this.state.customerName}
-                  // value={TextInput}
+
                   placeholder="Description"
               />
 
@@ -462,11 +436,9 @@ export default class SearchableDropDown extends Component {
             <View style={{marginVertical:5}}>
               <Button type="submit" color='#173753' title='Confirm order'
 
-                  // disabled={this.state.isOrderDisable}
                       onPress={
                         this.submitOrder
-                        // &
-                        // this.setState({isOrderDisable: true})
+
                       }
               />
             </View>
@@ -483,10 +455,6 @@ export default class SearchableDropDown extends Component {
         </SafeAreaView>
 
 
-        {/*<Button title='Reset' onPress={() =>*/}
-        {/*    itemAndQuantityList = []*/}
-        {/*}/>*/}
-        {/*<Button type="submit" color='blue' title='Confirm order'/>*/}
       </View>
   )}
   {this.state.isOrderDisable && (
@@ -510,9 +478,7 @@ export default class SearchableDropDown extends Component {
 
   };
 
-  printAitem(){
 
-  }
 
   renderSelectedItems(){
     var quantity='0';
@@ -545,15 +511,7 @@ export default class SearchableDropDown extends Component {
                                  padding:4
                                }}
                                onChangeText={(value) => quantity=value}
-                               // onTouchStart={quantity=''}
-                               // onContentSizeChange={(value) =>{
-                               //   quantityList.push(value)
-                               // }}
-                               // onEndEditing={text => quantityList.push(text)}
-                               // onEndEditing={(value) =>{
-                               //   quantityList.push(value)
-                               // }
-                               // }
+
 
                                placeholder="Quantity"
                            />
@@ -565,31 +523,12 @@ export default class SearchableDropDown extends Component {
                                color='red'
                                    />
 
-                             {/*<TouchableOpacity onPress={() => setTimeout(() => { this.props.onRemoveItem(item, index) }, 0) } style={{ backgroundColor: '#f16d6b', alignItems: 'center', justifyContent: 'center', width: 25, height: 25, borderRadius: 100, marginLeft: 10}}>*/}
-                             {/*    <Text>X</Text>*/}
-                             {/*</TouchableOpacity>*/}
-                           {/*<View>*/}
 
-                           {/*<TouchableOpacity disabled={a} onPress={() => a=true}>*/}
-                           {/*  <Text>set</Text>*/}
-                           {/*</TouchableOpacity>*/}
-
-                             {/*<Button*/}
-
-                             {/*    title='test'*/}
-                             {/*    onPress={() =>*/}
-                             {/*    quantity=''*/}
-
-                             {/*     }*/}
-                             {/*/>*/}
 
                            <Button
 
                                title='Add to List'
-                               // onPress={() =>
-                               // console.log(item.itemName + ' - ' + quantity)
-                               //
-                               // }
+
                                color='green'
                                onPress={() =>
                                    itemAndQuantityList.push(item.itemName+' = '+quantity) &
@@ -602,8 +541,6 @@ export default class SearchableDropDown extends Component {
                            />
 
 
-
-                           {/*</View>*/}
 
                          </View>
 

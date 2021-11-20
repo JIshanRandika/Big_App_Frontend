@@ -46,24 +46,7 @@ var items = [
 
 
 export default class CreatOrderView extends React.Component {
-    // ShowCurrentDate=()=>{
-    //
-    //     var date = new Date().getDate();
-    //     var month = new Date().getMonth() + 1;
-    //     var year = new Date().getFullYear();
-    //     var hours = new Date().getHours();
-    //     var min = new Date().getMinutes();
-    //     var sec = new Date().getSeconds();
-    //
-    //     console.log(this.state.customerName + '-' + this.state.customerContact + '-' + date + '-' + month + '-' + year + ','+hours+':'+min+':'+sec)
-    //     // Alert.alert(date + '-' + month + '-' + year);
-    //     this.setState({ orderID:this.state.customerName + '-' + this.state.customerContact + '-' + date + '-' + month + '-' + year + ','+hours+':'+min+':'+sec})
-    //
-    //
-    //     console.log(this.state.Quantity)
-    //
-    //
-    // }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -75,14 +58,7 @@ export default class CreatOrderView extends React.Component {
             allItems:[],
             Quantity:[],
             selectedItems: [
-                // {
-                //     id: 7,
-                //     itemName: 'Go',
-                // },
-                // {
-                //     id: 8,
-                //     itemName: 'Swift',
-                // }
+
             ],
             selectedShops: [
 
@@ -93,37 +69,17 @@ export default class CreatOrderView extends React.Component {
     componentDidMount() {
         this.setState({isLoading: true});
 
-        // fetch('https://healthyfoodssabra.herokuapp.com/api/products')
         fetch('https://bigdealershipbackend.herokuapp.com/api/shops')
             .then(response => response.json())
             .then(data => this.setState({allShops: data}));
 
-        // fetch('https://healthyfoodssabra.herokuapp.com/api/products')
-        //     fetch('http://192.168.8.100:8080/api/items')
-        //     .then(response => response.json())
-        //     .then(data => this.setState({allItems: data}));
 
-
-        // const requestOptions = {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ searchUsername: 'userone'})
-        // };
-        //
-        // fetch('http://192.168.8.100:8080/api/itemforuser',requestOptions)
-        //     .then(response => response.json())
-        //     .then(data => this.setState({allItems: data, isLoading: false}));
 
     }
 
 
     itemList(){
-        // console.log('test')
 
-        // return(
-        //
-        //     <View><Button title='{testing}'/></View>
-        // );
 
         for(let i=0; i<5; i++){
             return(
@@ -243,16 +199,6 @@ export default class CreatOrderView extends React.Component {
                 />
                 </View>
 
-                {/*<Button title='load' onPress={() =>*/}
-
-                {/*    fetch('http://192.168.8.101:8080/api/availableitemforuser',{*/}
-                {/*        method: 'POST',*/}
-                {/*        headers: { 'Content-Type': 'application/json' },*/}
-                {/*        body: JSON.stringify({ searchUsername: this.state.newSelect})*/}
-                {/*    })*/}
-                {/*    .then(response => response.json())*/}
-                {/*    .then(data => this.setState({allItems: data, isLoading: false}))*/}
-                {/*}/>*/}
 
                 {/*item dropdown=========================================================================*/}
                 {/* Multi */}
@@ -309,55 +255,7 @@ export default class CreatOrderView extends React.Component {
                     }
                 />
                 </View>
-                {/*<TextInput*/}
-                {/*    onChangeText={(value) => this.setState({customerName: value})}*/}
-                {/*    // onChangeText={this.state.customerName}*/}
-                {/*    // value={TextInput}*/}
-                {/*    placeholder="Enter Your Name"*/}
-                {/*/>*/}
 
-
-                {/*<TextInput*/}
-                {/*    onChangeText={(value) => this.setState({customerContact: value})}*/}
-                {/*    // onChangeText={this.state.customerName}*/}
-                {/*    // value={TextInput}*/}
-                {/*    placeholder="Enter Your Contact Number"*/}
-                {/*/>*/}
-                {/*<Button title='create order id' onPress={*/}
-                {/*    this.ShowCurrentDate*/}
-
-
-                {/*}/>*/}
-
-
-                {/*<View><Text>{this.state.orderID}</Text></View>*/}
-
-                {/*<View style={{flexDirection:'row'}}>*/}
-
-                {/*    <View style={{width:"50%",margin:5}}>*/}
-                {/*        <Text>Item Name</Text>*/}
-                {/*    </View>*/}
-                {/*    <View style={{width:"50%",margin:5}}>*/}
-                {/*        <Text>Quantity</Text>*/}
-                {/*    </View>*/}
-                {/*</View>*/}
-
-                {/*<View style={{flexDirection:'row'}}>*/}
-
-                {/*    <View style={{width:"50%",margin:5}}>*/}
-                {/*        <Text>{this.state.selectedItems.itemName}</Text>*/}
-                {/*    </View>*/}
-                {/*    <View style={{width:"50%",margin:5}}>*/}
-                {/*        <Text>Q</Text>*/}
-                {/*    </View>*/}
-                {/*</View>*/}
-
-
-
-
-                {/*<View>*/}
-                {/*    {this.itemList()}*/}
-                {/*</View>*/}
 
 
 
