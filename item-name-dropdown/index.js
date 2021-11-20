@@ -58,7 +58,7 @@ export default class SearchableDropDown extends Component {
     let items = this.props.items;
     console.log('as-'+this.state.selectedshopname)
     // for(let i=0; i<itemAndQuantityList.length; i++){
-      fetch('http://192.168.8.101:8080/api/order', {
+      fetch('https://bigdealershipbackend.herokuapp.com/api/order', {
       method:'POST',
       headers: {
         'Accept': 'application/json',

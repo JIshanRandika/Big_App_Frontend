@@ -27,7 +27,7 @@ export default class TrackOrderView extends React.Component {
         }
     }
     getOrderDetail=()=>{
-        fetch('http://192.168.8.101:8080/api/orderfortracker',{
+        fetch('https://bigdealershipbackend.herokuapp.com/api/orderfortracker',{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ customerContact: this.state.customerContact,orderSecretCode:this.state.orderSecretCode})
@@ -37,7 +37,7 @@ export default class TrackOrderView extends React.Component {
             .then(data =>console.log(this.state.orderData))
     }
     async remove(id) {
-        await fetch(`http://192.168.8.101:8080/api/order/${id}`, {
+        await fetch(`https://bigdealershipbackend.herokuapp.com/api/order/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',

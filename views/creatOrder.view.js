@@ -94,7 +94,7 @@ export default class CreatOrderView extends React.Component {
         this.setState({isLoading: true});
 
         // fetch('https://healthyfoodssabra.herokuapp.com/api/products')
-        fetch('http://192.168.8.101:8080/api/shops')
+        fetch('https://bigdealershipbackend.herokuapp.com/api/shops')
             .then(response => response.json())
             .then(data => this.setState({allShops: data}));
 
@@ -194,7 +194,7 @@ export default class CreatOrderView extends React.Component {
                         this.setState({ newSelect:shop.username})
                         this.setState({ selectedShops: shops });
 
-                        fetch('http://192.168.8.101:8080/api/availableitemforuser',{
+                        fetch('https://bigdealershipbackend.herokuapp.com/api/availableitemforuser',{
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ searchUsername: this.state.newSelect})
