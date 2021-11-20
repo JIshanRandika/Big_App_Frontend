@@ -70,7 +70,7 @@ export default class CreatOrderView extends React.Component {
             orderID:'',
             customerName:'1',
             customerContact:'',
-            newSelect:'Search by Shop',
+            newSelect:'Select a shop',
             allShops:[],
             allItems:[],
             Quantity:[],
@@ -143,14 +143,45 @@ export default class CreatOrderView extends React.Component {
 
 
             <View>
-                {/*<View style={{alignItems:"center"}}>*/}
-                {/*    <Image style={{*/}
-                {/*        width: 200,*/}
-                {/*        height: 200*/}
-                {/*    }} source={require('../assets/images/logo.png')}/>*/}
-                {/*</View>*/}
+                <View style={{alignItems:'center'}}>
+                <View style={{flexDirection: 'row',alignItems:'center'}}>
 
+                    <Image style={{
+                        width: 50,
+                        height: 50
+                    }} source={require('../assets/images/logo.png')}/>
+                    <Image style={{
+                        width: 50,
+                        height: 50
+                    }} source={require('../assets/images/logo.png')}/>
+                    <Image style={{
+                        width: 50,
+                        height: 50
+                    }} source={require('../assets/images/logo.png')}/>
+                    <Image style={{
+                        width: 50,
+                        height: 50
+                    }} source={require('../assets/images/logo.png')}/>
+                    <Image style={{
+                        width: 50,
+                        height: 50
+                    }} source={require('../assets/images/logo.png')}/>
+                    <Image style={{
+                        width: 50,
+                        height: 50
+                    }} source={require('../assets/images/logo.png')}/>
+                    <Image style={{
+                        width: 50,
+                        height: 50
+                    }} source={require('../assets/images/logo.png')}/>
+                    <Image style={{
+                        width: 50,
+                        height: 50
+                    }} source={require('../assets/images/logo.png')}/>
 
+                </View>
+
+                </View>
                 <View style={{alignItems:'center'}}>
                 {/*shop dropdown=========================================================================*/}
                 <ShopDropdown
@@ -172,7 +203,7 @@ export default class CreatOrderView extends React.Component {
                             .then(data => this.setState({allItems: data, isLoading: false}))
 
                     }}
-                    containerStyle={{ padding: 5, width: "90%" }}
+                    containerStyle={{ padding: 5, width: 350 }}
                     onRemoveItem={(shop, index) => {
                         const shops = this.state.selectedItems.filter((sitem) => sitem.id !== shop.id);
                         this.setState({ selectedShops: shops });
@@ -198,7 +229,7 @@ export default class CreatOrderView extends React.Component {
 
                                 padding: 12,
                                 borderWidth: 1,
-                                borderColor: '#0056ff',
+                                borderColor: '#2892D7',
                                 borderRadius: 5,
                             },
                             // onTextChange: text => alert(text)
@@ -225,6 +256,7 @@ export default class CreatOrderView extends React.Component {
 
                 {/*item dropdown=========================================================================*/}
                 {/* Multi */}
+                <View style={{alignItems:'center'}}>
                 <ItemDropdown
                     multi={true}
                     selectedItems={this.state.selectedItems}
@@ -235,7 +267,7 @@ export default class CreatOrderView extends React.Component {
                         // console.log(this.state.allItems);
                         this.setState({ selectedItems: items });
                     }}
-                    containerStyle={{ padding: 5 }}
+                    containerStyle={{ padding: 5, width: 350 }}
                     onRemoveItem={(item, index) => {
 
                         const items = this.state.selectedItems.filter((sitem) => sitem._id !== item._id);
@@ -263,7 +295,7 @@ export default class CreatOrderView extends React.Component {
                             style: {
                                 padding: 12,
                                 borderWidth: 1,
-                                borderColor: '#ccc',
+                                borderColor: '#2892D7',
                                 borderRadius: 5,
                             },
 
@@ -276,6 +308,7 @@ export default class CreatOrderView extends React.Component {
                         }
                     }
                 />
+                </View>
                 {/*<TextInput*/}
                 {/*    onChangeText={(value) => this.setState({customerName: value})}*/}
                 {/*    // onChangeText={this.state.customerName}*/}

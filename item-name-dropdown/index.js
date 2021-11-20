@@ -6,7 +6,7 @@ import {
   TextInput,
   View,
   TouchableOpacity,
-  Keyboard, Button, Platform
+  Keyboard, Button, Platform,SafeAreaView, ScrollView
 } from 'react-native';
 
 const defaultItemValue = {
@@ -31,6 +31,7 @@ export default class SearchableDropDown extends Component {
     // Alert.alert(date + '-' + month + '-' + year);
     this.setState({ orderID:this.state.customerName + '-' + this.state.customerContact + '-' + date + '-' + month + '-' + year + ','+hours+':'+min+':'+sec})
 
+    this.setState({isOrderIDCreated:true})
   }
   constructor(props) {
     super(props);
@@ -39,6 +40,7 @@ export default class SearchableDropDown extends Component {
     this.searchedItems = this.searchedItems.bind(this);
     this.renderItems = this.renderItems.bind(this);
     this.state = {
+      isOrderIDCreated:false,
       selectedshopname:'a',
       orderID:'',
       orderSecretCode:'',
@@ -84,6 +86,7 @@ export default class SearchableDropDown extends Component {
     }
     itemAndQuantityList = []
     this.setState({isOrderDisable: true})
+    this.setState({isOrderIDCreated: false})
     this.setState({orderID: null})
   }
 
@@ -367,15 +370,25 @@ export default class SearchableDropDown extends Component {
         {/*    console.log(quantityList)*/}
         {/*}*/}
         {/*/>*/}
-        <View>
-
-          { itemAndQuantityList.map((item, key)=>(
-              <Text key={key} > { item } </Text>)
-          )}
-        </View>
+        <SafeAreaView style={{height:80}}>
+          <ScrollView>
+            <View>
+              { itemAndQuantityList.map((item, key)=>(
+                  <Text style={{fontWeight:'bold',color:'#2892D7'}} key={key} > { item } </Text>)
+              )}
+            </View>
+          </ScrollView>
+        </SafeAreaView>
 
         {/*<View><Text></Text></View>*/}
         <TextInput
+            style={{
+              marginVertical:5,
+              padding: 12,
+              borderWidth: 1,
+              borderColor: '#2892D7',
+              borderRadius: 5,}}
+
             onChangeText={(value) => this.setState({customerName: value})}
             // onChangeText={this.state.customerName}
             // value={TextInput}
@@ -384,6 +397,13 @@ export default class SearchableDropDown extends Component {
 
 
         <TextInput
+            style={{
+              marginVertical:5,
+              padding: 12,
+              borderWidth: 1,
+              borderColor: '#2892D7',
+              borderRadius: 5,}}
+
             onChangeText={(value) => this.setState({customerContact: value})}
             // onChangeText={this.state.customerName}
             // value={TextInput}
@@ -391,32 +411,62 @@ export default class SearchableDropDown extends Component {
         />
 
         <TextInput
+            style={{
+              marginVertical:5,
+              padding: 12,
+              borderWidth: 1,
+              borderColor: '#2892D7',
+              borderRadius: 5,}}
             onChangeText={(value) => this.setState({orderSecretCode: value})}
             // onChangeText={this.state.customerName}
             // value={TextInput}
             placeholder="Enter a secrete code to track your order"
         />
-
-        <Button title='create order id' onPress={
+        <View style={{marginVertical:5}}>
+        <Button color='#2892D7' title='create order id' onPress={
           this.createOrderID
         }/>
-        <View><Text>{this.state.orderID}</Text></View>
+        </View>
+        <View style={{marginVertical:5}}>
+          <Text style={{fontWeight:'bold',fontSize:18}}>Order ID:</Text>
+          <View style={{alignItems:'center'}}>
+            <Text style={{fontWeight:'bold',color:'red'}}>{this.state.orderID}</Text>
+          </View>
 
-        <TextInput
-            onChangeText={(value) => this.setState({orderDescription: value})}
-            // onChangeText={this.state.customerName}
-            // value={TextInput}
-            placeholder="Description"
-        />
-        <Button type="submit" color='blue' title='Confirm order'
+        </View>
 
-                // disabled={this.state.isOrderDisable}
-                onPress={
-                  this.submitOrder
-                  // &
-                  // this.setState({isOrderDisable: true})
-                }
-        />
+        {this.state.isOrderIDCreated && (
+            <View>
+              <TextInput
+                  style={{
+                    marginVertical:5,
+                    padding: 12,
+                    borderWidth: 1,
+                    borderColor: '#2892D7',
+                    borderRadius: 5,}}
+
+                  onChangeText={(value) => this.setState({orderDescription: value})}
+                  // onChangeText={this.state.customerName}
+                  // value={TextInput}
+                  placeholder="Description"
+              />
+
+
+            <View style={{marginVertical:5}}>
+              <Button type="submit" color='#173753' title='Confirm order'
+
+                  // disabled={this.state.isOrderDisable}
+                      onPress={
+                        this.submitOrder
+                        // &
+                        // this.setState({isOrderDisable: true})
+                      }
+              />
+            </View>
+            </View>
+        )}
+
+
 
         {/*<Button title='Reset' onPress={() =>*/}
         {/*    itemAndQuantityList = []*/}
@@ -426,7 +476,7 @@ export default class SearchableDropDown extends Component {
   )}
   {this.state.isOrderDisable && (
       <View style={{margin:100}}>
-        <Button type="submit" color='green' title='Create New Order' style={{margin:10}}
+        <Button type="submit" color='#2892D7' title='Create New Order' style={{margin:10}}
                 onPress={
                   this.createNewOrder
 
@@ -472,7 +522,11 @@ export default class SearchableDropDown extends Component {
                              }}>
                              <Text style={{ color: '#555',width:'30%' }}>{item.itemName}</Text>
                            <TextInput
-                               style={{borderWidth: 1}}
+                               style={{
+                                 marginHorizontal:3,
+                                 borderWidth: 1,
+                                 padding:4
+                               }}
                                onChangeText={(value) => quantity=value}
                                // onTouchStart={quantity=''}
                                // onContentSizeChange={(value) =>{
@@ -484,7 +538,7 @@ export default class SearchableDropDown extends Component {
                                // }
                                // }
 
-                               placeholder="Enter Quantity"
+                               placeholder="Quantity"
                            />
 
 

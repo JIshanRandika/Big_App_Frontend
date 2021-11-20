@@ -19,15 +19,17 @@ function HomeView({navigation}) {
                 <View style={{margin:20}}>
                     <View style={{marginVertical:20}}>
                         <Button
+                            color='#2892D7'
                             onPress={() => navigation.navigate('Order Creator')}
-                            title="New order >>>>>"
+                            title="New order >>>>>>>>>>>>>>>>>>>"
                         />
                     </View>
 
                     <View style={{marginVertical:20}}>
                         <Button
+                            color='#173753'
                             onPress={() => navigation.navigate('Order Tracker')}
-                            title="<<<<< Track your orders"
+                            title="<<<<<<<<<< Track your orders"
                         />
                     </View>
                 </View>
