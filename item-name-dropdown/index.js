@@ -366,6 +366,7 @@ export default class SearchableDropDown extends Component {
             <View>
         <TextInput
             style={{
+              marginTop:10,
               marginVertical:5,
               padding: 12,
               borderWidth: 1,
@@ -374,7 +375,7 @@ export default class SearchableDropDown extends Component {
 
             onChangeText={(value) => this.setState({customerName: value})}
 
-            placeholder="Enter Your Name"
+            placeholder="Enter your name"
         />
 
 
@@ -388,7 +389,7 @@ export default class SearchableDropDown extends Component {
 
             onChangeText={(value) => this.setState({customerContact: value})}
 
-            placeholder="Enter Your Contact Number"
+            placeholder="Enter your contact number"
         />
 
         <TextInput
@@ -400,7 +401,7 @@ export default class SearchableDropDown extends Component {
               borderRadius: 5,}}
             onChangeText={(value) => this.setState({orderSecretCode: value})}
 
-            placeholder="Enter a secrete code to track your order"
+            placeholder="Enter a secret code to track your order"
         />
 
         <View style={{marginVertical:5}}>

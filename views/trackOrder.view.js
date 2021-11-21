@@ -107,7 +107,7 @@ export default class TrackOrderView extends React.Component {
                         onChangeText={(value) => this.setState({customerContact: value})}
                         // onChangeText={this.state.customerName}
                         // value={TextInput}
-                        placeholder="Enter Your Contact Number"
+                        placeholder="Enter your contact number"
                     />
                 </View>
 
@@ -123,12 +123,12 @@ export default class TrackOrderView extends React.Component {
                     onChangeText={(value) => this.setState({orderSecretCode: value})}
                     // onChangeText={this.state.customerName}
                     // value={TextInput}
-                    placeholder="Enter a secrete code to track your order"
+                    placeholder="Enter your secret code to track the order"
                 />
                 </View>
             </View>
                 <View style={{marginHorizontal:28,marginVertical:10}}>
-                    <Button title='Check' onPress={
+                    <Button color='#2892D7' title='Check' onPress={
                         this.getOrderDetail
                     }/>
                 </View>
