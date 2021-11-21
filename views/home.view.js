@@ -33,6 +33,7 @@ function HomeView({navigation}) {
                     </View>
                     <View style={{marginVertical:20,alignItems:'center'}}>
                         <Text>Phone/Whatsapp: +94 71 57 57 700</Text>
+                        <Text>Email: big.dealership@gmail.com</Text>
                     </View>
                 </View>
 
